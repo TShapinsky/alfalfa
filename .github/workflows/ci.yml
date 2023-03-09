@@ -282,6 +282,7 @@ jobs:
           files: |
             docker-compose.yml
             docker-compose.historian.yml
+            ${{ steps.meta.outputs.bake-file }}
           set: |
             web.cache-from=type=gha,scope=web:${{ github.ref_name }}
             worker.cache-from=type=gha,scope=worker:${{ github.ref_name }}
@@ -289,7 +290,7 @@ jobs:
             web.cache-to=type=gha,mode=max,scope=web:${{ github.ref_name }}
             worker.cache-to=type=gha,mode=max,scope=worker:${{ github.ref_name }}
             grafana.cache-to=type=gha,mode=max,scope=grafana:${{ github.ref_name }}
-          load: true
+          push: true
 
-      - name: Tag and push images
-        run: ./.github/workflows/tag_push_docker.sh
+      # - name: Tag and push images
+      #   run: ./.github/workflows/tag_push_docker.sh
